@@ -16,11 +16,10 @@ FSJS project 2 - List Filter and Pagination
    will only be used inside of a function, then it can be locally 
    scoped to that function.
 ***/
-const studentsList = document.querySelector('.student-list');
+const studentsList = document.querySelectorAll('.student-list');
 console.log(studentsList);
-const studentItem = studentsList.children;
-
-
+const studentItems = studentsList.children;
+const studentsPerPage = 10;
 /*** 
    Create the `showPage` function to hide all of the items in the 
    list except for the ten you want to show.
@@ -35,29 +34,27 @@ const studentItem = studentsList.children;
        that will be passed into the parens later when you call or 
        "invoke" the function 
 ***/
-const showPage = (list, page) => {
+const showPage = (studentsList, page) => {
 
-   list = studentItem;
    let startIndex = (page * 10) - 10;
    let endIndex = page * 10;
-   for (let i = 0; i < studentItem.length; i++) {
-      if (i >= startIndex && i <= endIndex) {
-         studentItem[i].style.display = '';
+   for (let i = 0; i < studentsList.length; i++) {
+      if (i >= startIndex && i < endIndex) {
+         studentsList[i].style.display = '';
       } else {
-         studentItem[i].style.display = 'none';
-      }
+         studentsList[i].style.display = 'none'     
+       }
    }
 };
-showPage(list,1); /*** CALLING showPage TO PRINT THE FIRST PAGE */
+showPage(studentsList,1); /*** CALLING showPage TO PRINT THE FIRST PAGE */
 
 /*** 
    Create the `appendPageLinks function` to generate, append, and add 
    functionality to the pagination buttons.
 ***/
-const appendPageLinks = (list) => {
+const appendPageLinks = (studentsList) => {
 
-   let studentsPerPage = 10;
-   let pageNumber = studentItem.length/studentsPerPage;
+   let pageNumber = studentsList.length/studentsPerPage;
    const div = document.createElement('div');
    div.className = 'pagination';
    page.appendChild('div');
@@ -71,22 +68,23 @@ const appendPageLinks = (list) => {
          li.appendChild('a');
 
       a.addEventListener('click', (e) => {
-         showPage(list, page);
 
    /** Loop over pagination links to remove active class from all links
          Add the active class to the link that was just clicked. You can identify that clicked link using event.target
       ***/
-         let paginationLinks = document.querySelector('.pagination ul');
+         let paginationLinks = document.querySelectorAll('.pagination ul');
          for(i=0; i < paginationLinks.length; i++) {
             paginationLinks[i].className = '';
-            a.className.event.target = 'active';
          }
+         a.className = event.target.className;
+         showPage(studentsList,a.textContent);
+         
          
       });
       }; 
 
 };
-
+appendPageLinks(studentsList);
 
 
 

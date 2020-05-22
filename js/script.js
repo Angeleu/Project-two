@@ -16,8 +16,11 @@ FSJS project 2 - List Filter and Pagination
    will only be used inside of a function, then it can be locally 
    scoped to that function.
 ***/
-const studentsList = document.querySelector('.student-list');
+/** CREATING A VARIABLE studentsList TO SELECT ALL STUDENTS ELEMENTS */
+const studentsList = document.querySelectorAll('.student-list');
 console.log(studentsList);
+
+/** CREATE A VARIABLE studentItems TO STORE THE SELECTED LIST OF ITEMS AND THEIR VALUE  */
 const studentItems = studentsList.children;
 const studentsPerPage = 10;
 const page = document.querySelector('.page');
@@ -39,6 +42,7 @@ const showPage = (studentItems, page) => {
 
    let startIndex = (page * 10) - 10;
    let endIndex = page * 10;
+   /** LOOP OVER STUDENT ITEMS TO DISPLAY THE RIGHT AMOUNT OF ITEMS PER PAGE(10 ITEMS) AND HIDE THE EXCES   */
    for (let i = 0; i < studentItems.length; i++) {
       if (i >= startIndex && i < endIndex) {
          studentItems[i].style.display = '';
@@ -52,8 +56,11 @@ const showPage = (studentItems, page) => {
    functionality to the pagination buttons.
 ***/
 const appendPageLinks = (studentItems) => {
-
+/** ROUNDING UP TO THE HIGHEST INTEGER TO GET THE TOTAL NUMBER OF PAGES WE NEED FOR OUR LIST OF 54 STUDENTS 
+ WITH 10 ITEMS PER PAGE  */
    let pageNumber = Math.ceil(studentItems.length/studentsPerPage);
+
+/** CREATING A DIV ELEMENT WITH A CLASS NAMED PAGINATION THAT CONTAINS AN UNORDERED LIST OF PAGINATION LINKS */
    const div = document.createElement('div');
    div.className = 'pagination';
    page.appendChild(div);
@@ -63,13 +70,15 @@ const appendPageLinks = (studentItems) => {
          const li = document.createElement('li');
          const a = document.createElement('a');
          a.textContent = i;
+
+      /** GIVE AN ACTIVE CLASS TO THE FIRST PAGINATION LINK */
          if(i === 1) {a.className = "active"}
          ul.appendChild(li);
          li.appendChild(a);
 
       a.addEventListener('click', (e) => {
-   /** Loop over pagination links to remove active class from all links
-         Add the active class to the link that was just clicked. You can identify that clicked link using event.target
+   
+      /** LOOP OVER PAGINATION LINKS TO MAKE ONLY THE CLICKED PAGE ACTIVE AND DISPLAY THE SAID PAGE
       ***/
          let paginationLinks = document.querySelectorAll('.pagination ul li a');
          for(i=0; i < paginationLinks.length; i++) {
@@ -80,6 +89,8 @@ const appendPageLinks = (studentItems) => {
          showPage(studentItems,a.textContent);
          }
       });
+      /** HIGHLIGHT THE LINK THAT IS POINTED OVER BY THE CURSOR */
+
       a.addEventListener('mouseover', (e) => {
          e.target.style.cursor = 'pointer';
       });

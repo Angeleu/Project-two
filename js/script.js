@@ -17,10 +17,10 @@ FSJS project 2 - List Filter and Pagination
    scoped to that function.
 ***/
 /** CREATING A VARIABLE studentsList TO SELECT ALL STUDENTS ELEMENTS */
-const studentsList = document.querySelectorAll('.student-list');
+const studentsList = document.querySelector('.student-list');
 console.log(studentsList);
 
-/** CREATE A VARIABLE studentItems TO STORE THE SELECTED LIST OF ITEMS AND THEIR VALUE  */
+/** CREATING A VARIABLE studentItems TO STORE THE SELECTED LIST OF ITEMS AND THEIR VALUE  */
 const studentItems = studentsList.children;
 const studentsPerPage = 10;
 const page = document.querySelector('.page');
